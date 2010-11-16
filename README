@@ -1,0 +1,1 @@
+A tiny little Python app that compiles markdown + Jinja and uploads the resulting HTML to Amazon S3/CloudFront
