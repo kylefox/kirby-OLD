@@ -1,3 +1,3 @@
 from nanook import parser
 
-parser.Parse('posts/this_is_a_post.md')
+parser.parse('posts/this_is_a_post.md')

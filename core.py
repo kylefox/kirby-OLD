@@ -1,3 +1,5 @@
+from nanook import parser
+
 class Nanook(object):
 
     def render_path(self, path):
@@ -10,6 +12,7 @@ class Nanook(object):
             return {
                 '/': '<h1>Homepage</h1> %s' % menu,
                 '/about': '<h1>about</h1> %s' % menu,
+                '/post' : parser.parse('posts/this_is_a_post.md'),
                 '/favicon.ico': ''
             }[path]
         except KeyError:
