@@ -1,3 +1,5 @@
+from nanook import parser
+
 class Nanook(object):
 
     def render_path(self, path):
@@ -6,10 +8,9 @@ class Nanook(object):
         If that page doesn't exist, None is returned.
         """
         try:
-            menu = '<p><a href="/">home</a> | <a href="/about">about</a> | <a href="/newp">not found</a></p>'
             return {
-                '/': '<h1>Homepage</h1> %s' % menu,
-                '/about': '<h1>about</h1> %s' % menu,
+                '/': parser.parse('index.md'),
+                '/post' : parser.parse('posts/this_is_a_post.md'),
                 '/favicon.ico': ''
             }[path]
         except KeyError:
@@ -22,5 +23,5 @@ class Nanook(object):
         """
         return {
          'index.html': self.render_path('/'),
-         'about/index.html': self.render_path('/about'),
+         'posts/this_is_a_post/index.html': self.render_path('/post'),
         }

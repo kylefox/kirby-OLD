@@ -17,7 +17,3 @@ def compile_page(page, **options):
   template = env.get_template(options.get('template', "base.html"))
   content = open(os.path.join(CONTENT_DIR, "%s.md" % page)).read()
   return template.render(content=markdown(content))
-  
-print compile_page('index')
-
-print compile_page('index', template='homepage.html')

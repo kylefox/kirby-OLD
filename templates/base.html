@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>{{ title }}</title>
+  <title>{% block title %}{{ title }}{% endblock %}</title>
 </head>
 <body>
-
+  <p><a href="/">home</a> | <a href="/post">Example post</a> | <a href="/newp">not found</a></p>
   <h1>{{ title }}</h1>
   
-  {{ content }}
+  {% block content %}{{ content }}{% endblock %}
 
 </body>
 </html>
