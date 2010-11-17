@@ -1,5 +1,6 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
+import autoreload
 from core import render_path
 
 class NanookHandler(BaseHTTPRequestHandler):
@@ -26,4 +27,4 @@ def _serve():
         server.socket.close()
         
 if __name__ == '__main__':
-    _serve()
+    autoreload.main(_serve)
