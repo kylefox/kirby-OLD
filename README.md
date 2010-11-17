@@ -43,3 +43,12 @@ TODO
 * Template tags
     * Fetching content (ex: show 5 blog posts on homepage)
     * Site-wide variables (site name, admin email, etc).
+    
+Notes
+-----
+
+Publishing requires these environment variables to be set:
+
+* AWS_ACCESS_KEY_ID
+* AWS_SECRET_ACCESS_KEY
+* NANOOK_BUCKET
