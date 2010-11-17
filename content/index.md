@@ -1,4 +1,5 @@
 title: Home
+template: homepage.html
 content:
   Welcome!
 
