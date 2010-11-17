@@ -1,5 +1,6 @@
 import os
 import yaml
+import markdown
 from jinja2 import *
 
 from nanook import settings
@@ -20,5 +21,7 @@ class Page():
 def parse(page):
     content = open(os.path.join(settings.CONTENT_DIR, page)).read()
     data = yaml.load(content)
+    data['content'] = data['content'].replace('\n', '\n\n')
+    data['content'] = markdown.markdown(data['content'])
     page = Page(data)
     return page.render()
