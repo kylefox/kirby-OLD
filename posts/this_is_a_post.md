@@ -1,5 +1,5 @@
 title: This is a post
-author: Jon Smelquist
+author: Jonathan Smelquist
 date: 2010/11/16
 content: >
   
