@@ -3,7 +3,7 @@ import yaml
 import markdown
 from jinja2 import *
 
-from nanook import settings
+import settings
 
 class Page():
     
