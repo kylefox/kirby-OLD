@@ -23,5 +23,5 @@ class Nanook(object):
         """
         return {
          'index.html': self.render_path('/'),
-         'posts/this_is_a_post/index.html': self.render_path('/post'),
+         'posts/this_is_a_post': self.render_path('/post'),
         }
