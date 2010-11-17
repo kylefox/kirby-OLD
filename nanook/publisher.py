@@ -2,7 +2,7 @@ import os
 import cStringIO, gzip
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
-from core import Nanook
+from nanook.core import Nanook
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']

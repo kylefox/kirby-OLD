@@ -1,7 +1,8 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
-import autoreload
-from core import Nanook
+from nanook import autoreload
+from nanook import settings
+from nanook.core import Nanook
 
 nanook = Nanook()
 
@@ -23,6 +24,8 @@ def _serve():
     try:
         server = HTTPServer(('', PORT), NanookHandler)
         print 'Nanook serving on port %s (^C to quit) ...' % PORT
+        print 'TEMPLATE_DIRS = %s' % settings.TEMPLATE_DIRS
+        print 'CONTENT_DIR = %s' % settings.CONTENT_DIR
         server.serve_forever()
     except KeyboardInterrupt:
         print "Shutting down."

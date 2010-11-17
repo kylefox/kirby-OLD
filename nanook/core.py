@@ -1,4 +1,4 @@
-import parser
+from nanook import parser
 
 class Nanook(object):
 
