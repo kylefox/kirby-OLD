@@ -1,12 +1,14 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 import autoreload
-from core import render_path
+from core import Nanook
+
+nanook = Nanook()
 
 class NanookHandler(BaseHTTPRequestHandler):
     
     def do_GET(self):
-        body = render_path(self.path)
+        body = nanook.render_path(self.path)
         if body is None:
             self.send_response(404)
             body = "Not found (404): %s\n" % self.path
