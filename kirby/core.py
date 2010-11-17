@@ -1,6 +1,6 @@
-from nanook import parser
+from kirby import parser
 
-class Nanook(object):
+class Kirby(object):
 
     def render_path(self, path):
         """

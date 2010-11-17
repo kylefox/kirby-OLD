@@ -1,15 +1,15 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
-from nanook import autoreload
-from nanook import settings
-from nanook.core import Nanook
+from kirby import autoreload
+from kirby import settings
+from kirby.core import Kirby
 
-nanook = Nanook()
+kirby = Kirby()
 
-class NanookHandler(BaseHTTPRequestHandler):
+class KirbyHandler(BaseHTTPRequestHandler):
     
     def do_GET(self):
-        body = nanook.render_path(self.path)
+        body = kirby.render_path(self.path)
         if body is None:
             self.send_response(404)
             body = "Not found (404): %s\n" % self.path
@@ -22,8 +22,8 @@ class NanookHandler(BaseHTTPRequestHandler):
 def _serve():
     PORT = 8000
     try:
-        server = HTTPServer(('', PORT), NanookHandler)
-        print 'Nanook serving on port %s (^C to quit) ...' % PORT
+        server = HTTPServer(('', PORT), KirbyHandler)
+        print 'Kirby serving on port %s (^C to quit) ...' % PORT
         print 'TEMPLATE_DIRS = %s' % settings.TEMPLATE_DIRS
         print 'CONTENT_DIR = %s' % settings.CONTENT_DIR
         server.serve_forever()

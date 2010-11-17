@@ -2,11 +2,11 @@ import os
 import cStringIO, gzip
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
-from nanook.core import Nanook
+from kirby.core import Kirby
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-NANOOK_BUCKET = os.environ['NANOOK_BUCKET']
+KIRBY_BUCKET = os.environ['KIRBY_BUCKET']
 
 def _gzip(data):
     zbuf = cStringIO.StringIO()
@@ -16,9 +16,9 @@ def _gzip(data):
     return zbuf.getvalue()
 
 def publish():
-    pages = Nanook().s3_page_dict()
+    pages = Kirby().s3_page_dict()
     s3 = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-    bucket = s3.get_bucket(NANOOK_BUCKET)
+    bucket = s3.get_bucket(KIRBY_BUCKET)
     headers = {
         'Content-Type': 'text/html',
         'Content-Encoding': 'gzip'

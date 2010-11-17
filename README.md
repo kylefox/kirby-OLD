@@ -5,7 +5,7 @@ Ideal usage
 
 Create a project, S3 bucket and CloudFront distribution:
 
-    $ nanook create example.com
+    $ kirby create example.com
 
 Resulting directory structure:
 
@@ -17,15 +17,15 @@ Resulting directory structure:
 Running the local server:
 
     $ cd example.com
-    $ nanook serve
+    $ kirby serve
 
 Publishing to CloudFront:
 
-    $ nanook publish
+    $ kirby publish
     
 Publish to CloudFront, but first delete any existing content:
 
-    $ nanook publish --fresh
+    $ kirby publish --fresh
 
 TODO
 ----
@@ -38,8 +38,8 @@ TODO
 * Instead of assuming 'index' to be homepage, make it an option?  That way we can set CloudFront's default root object to the page name (omitting .html).
 * Restructure codebase
     * work with pip
-    * `nanook` should be normal python module.  It shouldn't be the root of all nanook sites.  Instead, _projects_ use the `nanook` module.
-    * Create `bin/nanook` that handles the server, publishing, and creation of nanook projects.
+    * `kirby` should be normal python module.  It shouldn't be the root of all kirby sites.  Instead, _projects_ use the `kirby` module.
+    * Create `bin/kirby` that handles the server, publishing, and creation of kirby projects.
 * Template tags
     * Fetching content (ex: show 5 blog posts on homepage)
     * Site-wide variables (site name, admin email, etc).
@@ -51,4 +51,4 @@ Publishing requires these environment variables to be set:
 
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
-* NANOOK_BUCKET
+* KIRBY_BUCKET
