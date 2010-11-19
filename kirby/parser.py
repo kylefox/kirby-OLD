@@ -14,7 +14,6 @@ class Page():
     self.template = "page.html"
     content = open(os.path.join(self.site.content_path, page)).read()
     ym, md = content.split('- - -')
-    print md
     data = yaml.load(ym)
     data['content'] = markdown.markdown(md)
     self.data = data
