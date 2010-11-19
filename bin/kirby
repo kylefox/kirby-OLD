@@ -5,15 +5,28 @@ import kirby
 from kirby.core import Kirby
 from kirby.server import runserver
 
+def is_kirby_site(path):
+  "Checks if `path` is a valid Kirby site."
+  dirs = os.listdir(path)
+  for requirement in 'content media templates'.split():
+    if requirement not in dirs:
+      return False
+  return True
+  
+def valid_kirby_site():
+  "Bails if the current directory is not a Kirby site."
+  if not is_kirby_site(os.getcwd()):
+    print "This doesn't seem to be a Kirby site."
+    sys.exit(0)
+  return True
+
+
 if __name__ == "__main__":
   command = sys.argv[1]
-  if command == 'serve':
-    dirs = os.listdir(os.getcwd()) 
-    if 'content' in dirs and 'templates' in dirs:
-        runserver(os.getcwd())
-    else:
-      print "Directory not initialized properly!"
-      sys.exit(0)
+
+  if command == 'serve' and valid_kirby_site():
+      runserver(os.getcwd())
+      
   elif command == 'new':
     try:
       ROOT_PATH = os.path.join(os.getcwd(), sys.argv[2])
@@ -25,6 +38,18 @@ if __name__ == "__main__":
     except IndexError:
       print "You must specify a site name: kirby new [NAME]"
       sys.exit(0)
+
+  elif command == 'reset' and valid_kirby_site():
+    print "**************************************************************************"
+    print '** Whoa!  This will permanently delete ALL content, media and templates.'
+    print "** Be very sure you want to delete your site, because there's NO undo."
+    confirm = raw_input("\nContinue? [Y/n] ")
+    if confirm == "Y":
+      Kirby.reset_site(os.getcwd())
+      print 'Site was reset.'
+    else:
+      print "Nothing was deleted ... *whew*"
+
   else:
     print "Command '%s' not recognized." % command
     sys.exit(0)
