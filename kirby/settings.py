@@ -1,6 +1,4 @@
 import os
-from jinja2 import *
-from markdown import markdown
 
 ROOT = os.getcwd()
 

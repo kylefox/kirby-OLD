@@ -1,6 +1,6 @@
 import os
 import kirby
-from kirby import parser
+from kirby.parser import Page
 
 class Kirby(object):
     
@@ -36,8 +36,8 @@ class Kirby(object):
         """
         try:
             return {
-                '/': parser.parse('index.md'),
-                '/post' : parser.parse('posts/this_is_a_post.md'),
+                '/': Page('index.md').render(),
+                '/post' : Page('posts/this_is_a_post.md').render(),
                 '/favicon.ico': ''
             }[path]
         except KeyError:
