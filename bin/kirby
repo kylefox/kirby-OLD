@@ -8,7 +8,8 @@ from kirby.server import runserver
 if __name__ == "__main__":
   command = sys.argv[1]
   if command == 'serve':
-    if os.path.isdir(os.path.join(os.getcwd(), 'content')) and os.path.isdir(os.path.join(os.getcwd(), 'content')):
+    dirs = os.listdir(os.getcwd()) 
+    if 'content' in dirs and 'templates' in dirs:
         runserver(os.path.dirname(sys.argv[0]))
     else:
       print "Directory not initialized properly!"
