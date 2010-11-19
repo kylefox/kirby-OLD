@@ -1,7 +1,6 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 from kirby import autoreload
-from kirby import settings
 from kirby.core import Kirby
     
 def runserver(path):
@@ -25,8 +24,8 @@ def runserver(path):
         try:
             server = HTTPServer(('', PORT), KirbyHandler)
             print 'Kirby serving on port %s (^C to quit) ...' % PORT
-            print 'TEMPLATE_DIRS = %s' % settings.TEMPLATE_DIRS
-            print 'CONTENT_DIR = %s' % settings.CONTENT_DIR
+            print 'TEMPLATE_DIRS = %s' % kirby.template_path
+            print 'CONTENT_DIR = %s' % kirby.content_path
             server.serve_forever()
         except KeyboardInterrupt:
             print "Shutting down."

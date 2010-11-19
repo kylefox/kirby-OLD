@@ -36,8 +36,8 @@ class Kirby(object):
         """
         try:
             return {
-                '/': Page('index.md').render(),
-                '/post' : Page('posts/this_is_a_post.md').render(),
+                '/': Page(self, 'index.md').render(),
+                '/post' : Page(self, 'posts/this_is_a_post.md').render(),
                 '/favicon.ico': ''
             }[path]
         except KeyError:

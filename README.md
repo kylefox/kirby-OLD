@@ -10,7 +10,6 @@ Create a project, S3 bucket and CloudFront distribution:
 Resulting directory structure:
 
     example.com/
-    -- settings.py
     -- content/
     -- templates/
     

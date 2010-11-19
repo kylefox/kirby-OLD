@@ -10,7 +10,7 @@ if __name__ == "__main__":
   if command == 'serve':
     dirs = os.listdir(os.getcwd()) 
     if 'content' in dirs and 'templates' in dirs:
-        runserver(os.path.dirname(sys.argv[0]))
+        runserver(os.getcwd())
     else:
       print "Directory not initialized properly!"
       sys.exit(0)
