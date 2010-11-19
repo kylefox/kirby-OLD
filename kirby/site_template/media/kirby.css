@@ -1,0 +1,24 @@
+html {
+  background: #eee;
+  height: 100%;
+  -webkit-font-smoothing: antialised;
+}
+
+body {
+  background: #fff;
+  color: #888;
+  font: normal 13px/1.5 "Lucida Grande", Verdana, sans-serif;
+  width: 400px;
+  margin: 40px auto;
+  padding: 40px;
+  border: 10px solid #ddd;
+}
+
+a { color: #555; }
+a:hover { color: #000; }
+
+#header { text-align: center; border-bottom: 1px dashed #ddd; margin-bottom: 20px; }
+h1 { margin: 0; font: normal 36px/1.25 Georgia, serif; font-style: italic; }
+h1,h2 { color: #333; }
+h2 { font-size: 24px; letter-spacing: -1px;}
+code { background: #dfd; color: #000; }
