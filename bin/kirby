@@ -4,6 +4,7 @@ import os
 import kirby
 from kirby.core import Kirby
 from kirby.server import runserver
+from kirby.publisher import publish
 
 def is_kirby_site(path):
   "Checks if `path` is a valid Kirby site."
@@ -26,6 +27,9 @@ if __name__ == "__main__":
 
   if command == 'serve' and valid_kirby_site():
       runserver(os.getcwd())
+      
+  elif command == 'publish' and valid_kirby_site():
+    publish(Kirby(os.getcwd()))
       
   elif command == 'new':
     try:

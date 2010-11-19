@@ -2,7 +2,6 @@ import os
 import cStringIO, gzip
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
-from kirby.core import Kirby
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -15,8 +14,8 @@ def _gzip(data):
     zfile.close()
     return zbuf.getvalue()
 
-def publish():
-    pages = Kirby().s3_page_dict()
+def publish(site):
+    pages = site.s3_page_dict()
     s3 = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
     bucket = s3.get_bucket(KIRBY_BUCKET)
     headers = {
