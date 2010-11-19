@@ -1,53 +1,78 @@
-A tiny little Python app that compiles markdown + Jinja and uploads the resulting HTML to Amazon S3/CloudFront
-    
-Ideal usage
-------------
+A tiny little Python app that compiles markdown + Jinja and uploads the resulting HTML to Amazon S3 + CloudFront.
 
-Create a project, S3 bucket and CloudFront distribution:
+_This is still in early proof-of-concept stages.  It's not recommended for production use just yet._
+
+Installing
+----------
+
+Kirby is not yet available as a python package (support is planned).  For now, you need to:
+
+* Clone the git repository
+* Symlink the `kirby` module into Python's site-packages directory
+* Symlink `bin/kirby` into your environment's `$PATH`
+    
+Creating a Kirby site
+---------------------
+
+You create a new Kirby site with
 
     $ kirby create example.com
 
-Resulting directory structure:
+which creates the resulting directory structure:
 
-    example.com/
-    -- content/
-    -- templates/
+* example.com
+  * content
+  * media
+  * templates
     
-Running the local server:
+    
+Running the development server
+------------------------------
+
+After creating your site, spark up the development server:
 
     $ cd example.com
     $ kirby serve
+    
+The development server compiles your markdown and templates on the fly.  This is useful while you're working on the site design and for previewing content.
 
-Publishing to CloudFront:
+Creating pages
+--------------
+
+A **Page** is simply a markdown file located inside the `content` directory.  The URL to the page is the file path (relative to `content`) with the .md extension stripped.
+
+Some examples:
+
+* `content/about.md` is served at **http://localhost:8000/about**
+* `company/team/sammy.md` is be served at **http://localhost:8000/company/team/sammy**
+
+The only exception to this convention is the index page:
+
+* `content/index.md` is served at **http://localhost:8000/**
+  
+
+Publishing to CloudFront
+------------------------
+
+Once you're happy with the current state of your site, you can generate static HTML files and upload them to Amazon S3 using:
 
     $ kirby publish
     
-Publish to CloudFront, but first delete any existing content:
+Publishing requires these environment variables to be set:
 
-    $ kirby publish --fresh
+* `AWS_ACCESS_KEY_ID`
+* `AWS_SECRET_ACCESS_KEY`
+* `KIRBY_BUCKET`
 
-TODO
-----
+Contributing
+------------
 
-* Make nested pages (/about/design) work with CF.  Instead of naming keys "about/design/index.html" we could just name them "about/design".  (omit .html extension from S3 keys)
+Please fork and send pull requests.
+
+If you want something to work on, see our [issues](https://github.com/kylefox/kirby/issues) list.  We can also use help with:
+
 * Tests
 * Documentation
-* Static files (css/js/img): served from /media/
-* Integrate LessCSS/YUICompressor
-* Instead of assuming 'index' to be homepage, make it an option?  That way we can set CloudFront's default root object to the page name (omitting .html).
-* Restructure codebase
-    * work with pip
-    * `kirby` should be normal python module.  It shouldn't be the root of all kirby sites.  Instead, _projects_ use the `kirby` module.
-    * Create `bin/kirby` that handles the server, publishing, and creation of kirby projects.
 * Template tags
     * Fetching content (ex: show 5 blog posts on homepage)
     * Site-wide variables (site name, admin email, etc).
-    
-Notes
------
-
-Publishing requires these environment variables to be set:
-
-* AWS_ACCESS_KEY_ID
-* AWS_SECRET_ACCESS_KEY
-* KIRBY_BUCKET
