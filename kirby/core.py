@@ -42,6 +42,21 @@ class Kirby(object):
       self.content_path = os.path.join(self.root_path, 'content')
       self.template_path = os.path.join(self.root_path, 'templates')
       self.media_path = os.path.join(self.root_path, 'media')
+      self.reload_pages()
+      print self.pages
+      
+    def reload_pages(self):
+        """
+        Loads markdown files in the content directory.
+        Returns a dictionary where keys are URLs and values are Page objects.
+        """
+        self.pages = {}
+        for dirpath, dirnames, filenames in os.walk(self.content_path):
+            for filename in filenames:
+                if filename.endswith('.md'):
+                    path = os.path.join(dirpath, filename)
+                    page = Page(self, path)
+                    self.pages[page.url] = page
     
     def render_path(self, path):
         """
@@ -49,11 +64,7 @@ class Kirby(object):
         If that page doesn't exist, None is returned.
         """
         try:
-            return {
-                '/': Page(self, 'index.md').render(),
-                '/post' : Page(self, 'posts/this_is_a_post.md').render(),
-                '/favicon.ico': ''
-            }[path]
+            return self.pages[path].render()
         except KeyError:
             return None
         
@@ -62,7 +73,7 @@ class Kirby(object):
         Returns a dictionary whose keys are the S3 bucket keys
         and values are the HTML to be written.
         """
-        return {
-         'index.html': self.render_path('/'),
-         'posts/this_is_a_post': self.render_path('/post'),
-        }
+        pages = {}
+        for page in self.pages.values():
+            pages[page.s3_key] = page.render()
+        return pages
