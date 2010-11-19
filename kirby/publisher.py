@@ -3,6 +3,9 @@ import cStringIO, gzip
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 
+class InvalidAWSCredentials(Exception):
+  pass
+
 def _gzip(data):
     zbuf = cStringIO.StringIO()
     zfile = gzip.GzipFile(mode='wb', compresslevel=6, fileobj=zbuf)
@@ -12,9 +15,14 @@ def _gzip(data):
 
 def publish(site):
     
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    KIRBY_BUCKET = os.environ['KIRBY_BUCKET']
+    try:
+      AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+      AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+      KIRBY_BUCKET = os.environ['KIRBY_BUCKET']
+    except KeyError:
+      raise InvalidAWSCredentials("Missing Amazon AWS credentials.")
+    
+    
     s3 = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
     
     bucket = s3.get_bucket(KIRBY_BUCKET)

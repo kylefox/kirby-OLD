@@ -29,7 +29,11 @@ if __name__ == "__main__":
       runserver(os.getcwd())
       
   elif command == 'publish' and valid_kirby_site():
-    publish(Kirby(os.getcwd()))
+    try:
+      publish(Kirby(os.getcwd()))
+    except Exception, e:
+      print 'Could not publish: %s' % e
+      sys.exit(0)
       
   elif command == 'new':
     try:
