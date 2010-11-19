@@ -1,4 +1,5 @@
 import os
+import shutil
 import kirby
 from kirby.parser import Page
 
@@ -19,9 +20,22 @@ class Kirby(object):
       >>> Kirby.create_site('/home/kirby/example.com')
       <Kirby site: example.com>
       """
-      import shutil
       shutil.copytree(os.path.join(kirby.__path__[0], 'site_template'), root)
       return self(root)
+      
+    @classmethod
+    def reset_site(self, root):
+         """
+         Deletes the files in content, media, and template folders.
+         Returns the instantiated Kirby object.
+ 
+         >>> Kirby.reset_site('/home/kirby/example.com')
+         <Kirby site: example.com>
+         """
+         site = Kirby(root)
+         for path in 'content_path media_path template_path'.split():
+             shutil.rmtree(getattr(site, path))
+             os.mkdir(getattr(site, path))
     
     def __init__(self, root):
       self.root_path = root
