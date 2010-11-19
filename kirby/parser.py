@@ -13,9 +13,10 @@ class Page():
     self.site = site
     self.template = "page.html"
     content = open(os.path.join(self.site.content_path, page)).read()
-    data = yaml.load(content)
-    data['content'] = data['content'].replace('\n', '\n\n')
-    data['content'] = markdown.markdown(data['content'])
+    ym, md = content.split('- - -')
+    print md
+    data = yaml.load(ym)
+    data['content'] = markdown.markdown(md)
     self.data = data
     for p in data.keys():
         self.__dict__[p] = data[p]
