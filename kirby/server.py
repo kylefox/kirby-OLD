@@ -1,3 +1,5 @@
+import os
+import mimetypes
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 from kirby import autoreload
@@ -9,13 +11,24 @@ def runserver(path):
     class KirbyHandler(BaseHTTPRequestHandler):
 
         def do_GET(self):
-            body = kirby.render_path(self.path)
-            if body is None:
-                self.send_response(404)
-                body = "Not found (404): %s\n" % self.path
+            #First check for static media
+            path = kirby.root_path + self.path
+            mime = None
+            if os.path.isfile(path):
+              mime = mimetypes.guess_type(path)[0]
+              body = open(path).read()
+              self.send_response(200)
+            else:  
+              body = kirby.render_path(self.path)
+              if body is None:
+                  self.send_response(404)
+                  body = "Not found (404): %s\n" % self.path
+              else:
+                  self.send_response(200)
+            if mime is None:
+              self.send_header('Content-type', 'text/html')
             else:
-                self.send_response(200)
-            self.send_header('Content-type', 'text/html')
+              self.send_header('Content-type', mime)
             self.end_headers()
             self.wfile.write(body)
 
