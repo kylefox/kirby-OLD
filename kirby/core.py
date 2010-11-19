@@ -43,7 +43,6 @@ class Kirby(object):
       self.template_path = os.path.join(self.root_path, 'templates')
       self.media_path = os.path.join(self.root_path, 'media')
       self.reload_pages()
-      print self.pages
       
     def reload_pages(self):
         """

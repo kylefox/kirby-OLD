@@ -38,9 +38,7 @@ def runserver(path):
         PORT = 8000
         try:
             server = HTTPServer(('', PORT), KirbyHandler)
-            print 'Kirby serving on port %s (^C to quit) ...' % PORT
-            print 'TEMPLATE_DIRS = %s' % kirby.template_path
-            print 'CONTENT_DIR = %s' % kirby.content_path
+            print 'Kirby serving `%s` on port %s (^C to quit) ...' % (kirby, PORT)
             server.serve_forever()
         except KeyboardInterrupt:
             print "Shutting down."
