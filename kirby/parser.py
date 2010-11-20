@@ -34,7 +34,10 @@ class Page(object):
         resulting html. Pages will attempt to use `page.html` as the 
         template name which can be overridden in the markdown file.
         """
+        from kirby.template.default_filters import filters
         env = Environment(loader=FileSystemLoader(self.site.template_path))
+        print filters
+        env.filters.update(filters)
         template = env.get_template(self.template)
         return template.render(self.data)
     
