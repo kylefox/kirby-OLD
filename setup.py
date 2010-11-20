@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="Kirby",
     description="Create websites with Markdown + Jinja2 and upload to Amazon CloudFront.",
-    version="0.0.1pre-alpha",
+    version="0.0.1",
     author="Kyle Fox",
     author_email="kyle.fox@gmail.com",
     url="http://github.com/kylefox/kirby",
