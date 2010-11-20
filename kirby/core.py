@@ -1,7 +1,7 @@
 import os
 import shutil
 import kirby
-from kirby.parser import Page
+from kirby.pages import Page
 
 class Kirby(object):
     

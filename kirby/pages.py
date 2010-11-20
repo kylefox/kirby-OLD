@@ -56,7 +56,6 @@ class Page(object):
         """
         from kirby.template.default_filters import filters
         env = Environment(loader=FileSystemLoader(self.site.template_path))
-        print filters
         env.filters.update(filters)
         template = env.get_template(self.template)
         return template.render({ 'page': self, 'pages': PageManager(self.site) })
