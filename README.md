@@ -49,7 +49,20 @@ Some examples:
 The only exception to this convention is the index page:
 
 * `content/index.md` is served at **http://localhost:8000/**
-  
+ 
+Template Context
+----------------
+
+Inside your templates you can access your page data through the `page` context object. This object contains all dynamic YAML fields from your markdown file, as well as a `content` field taken from all content after the `- - -` delimiter.
+
+Some examples:
+
+* `{{ page.title }}` is a string mapped from the YAML element `title: My Title`
+* `{{ page.date }}` is date mapped from the YAML element `date: date: 2010-11-16`
+
+With the exception being the content:
+
+* `{{ page.content }}` contains the markdown-rendered HTML content of your page
 
 Publishing to CloudFront
 ------------------------
