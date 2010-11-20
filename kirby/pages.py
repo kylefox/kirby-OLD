@@ -8,10 +8,8 @@ class PageManager(object):
     def __init__(self, site):
         self.site = site
         self.pages = []
-        gen = os.walk(site.content_path)
-        for each_tuple in gen:
-            for fname in each_tuple[2]:
-                self.pages.append(Page(self.site, os.path.join(each_tuple[0],fname)))
+        for k, v in self.site.pages.iteritems():
+            self.pages.append(v)
 
     def all(self):
         return self.pages
