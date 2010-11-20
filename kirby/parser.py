@@ -39,7 +39,7 @@ class Page(object):
         print filters
         env.filters.update(filters)
         template = env.get_template(self.template)
-        return template.render(self.data)
+        return template.render({ 'page': self })
     
     def __repr__(self):
         return '<Page: %s>' % self.url
