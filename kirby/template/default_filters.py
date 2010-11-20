@@ -9,4 +9,7 @@ def register(fn):
 
 @register
 def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
-    return value.strftime(format)
+    try:
+        return value.strftime(format)
+    except:
+        return value

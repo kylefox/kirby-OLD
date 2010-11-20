@@ -1,7 +1,7 @@
 title: This is a post
 subtitle: Subtitle to a post
 author: Jonathan Smelquist
-date: 2010/11/16
+date: 2010-11-16
 
 - - -
 
