@@ -3,6 +3,26 @@ import yaml
 import markdown
 from jinja2 import *
 
+class PageManager(object):
+    
+    def __init__(self, site):
+        self.site = site
+        self.pages = []
+        gen = os.walk(site.content_path)
+        for each_tuple in gen:
+            for fname in each_tuple[2]:
+                self.pages.append(Page(self.site, os.path.join(each_tuple[0],fname)))
+
+    def all(self):
+        return self.pages
+
+    def in_path(self, path):
+        page_set = []
+        for page in self.pages:
+            if page.url.lstrip('/').startswith(path.lstrip('/')):
+                page_set.append(page)
+        return page_set
+
 class Page(object):
 
     def __init__(self, site, file_path):
@@ -39,7 +59,7 @@ class Page(object):
         print filters
         env.filters.update(filters)
         template = env.get_template(self.template)
-        return template.render({ 'page': self })
+        return template.render({ 'page': self, 'pages': PageManager(self.site) })
     
     def __repr__(self):
         return '<Page: %s>' % self.url
