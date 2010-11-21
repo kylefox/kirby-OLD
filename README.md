@@ -5,11 +5,15 @@ _This is still in early proof-of-concept stages.  It's not recommended for produ
 Installing
 ----------
 
-Kirby is not yet available as a python package (support is planned).  For now, you need to:
+Kirby is installable with pip (recommended):
 
-* Clone the git repository
-* Symlink the `kirby` module into Python's site-packages directory
-* Symlink `bin/kirby` into your environment's `$PATH`
+    $ pip install git+git://github.com/kylefox/kirby.git
+    
+You can also clone the repository and install:
+
+    $ git clone git://github.com/kylefox/kirby.git
+    $ cd kirby
+    $ python setup.py install
     
 Creating a Kirby site
 ---------------------
