@@ -17,7 +17,7 @@ def runserver(path):
               to allow path joining.
             """
             path = os.path.join(kirby.root_path, self.path[1:])
-            if os.path.isfile(path):
+            if self.path.startswith('/media') and os.path.isfile(path):
                 mime = mimetypes.guess_type(path)[0]
                 body = open(path).read()
                 self.send_response(200)
