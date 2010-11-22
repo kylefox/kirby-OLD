@@ -46,6 +46,12 @@ if __name__ == "__main__":
     except IndexError:
       print "You must specify a site name: kirby new [NAME]"
       sys.exit(0)
+      
+  elif command == 'aws':
+    from kirby.aws import setup_cloud
+    domain = raw_input("Enter the name for the S3 bucket (ie: example.com): ")
+    cloud = setup_cloud(domain)
+    print 'Created distribution: %s' % cloud.domain_name
 
   elif command == 'reset' and valid_kirby_site():
     print "**************************************************************************"
