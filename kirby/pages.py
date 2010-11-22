@@ -3,6 +3,14 @@ import yaml
 import markdown
 from jinja2 import *
 
+def file_path_to_url(site, path):
+    """
+    Given a filesystem path to a page, returns the absolute URL.
+    >>> file_path_to_url('/home/example.com/content/services/design.md')
+    u'/services/design'
+    """
+    return path.replace(site.content_path, "").rstrip('.md')
+
 class PageManager(object):
     
     def __init__(self, site):
@@ -29,7 +37,7 @@ class Page(object):
         """
         self.site = site
         self.template = "page.html"
-        self.url = file_path.replace(site.content_path, "").rstrip('.md')
+        self.url = file_path_to_url(site, file_path)
         self.s3_key = self.url.lstrip('/')
         if self.url == '/index':
             self.url = '/'

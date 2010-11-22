@@ -81,6 +81,15 @@ Publishing requires these environment variables to be set:
 * `AWS_SECRET_ACCESS_KEY`
 * `KIRBY_BUCKET`
 
+Running Tests
+-------------
+
+We use [nose](http://somethingaboutorange.com/mrl/projects/nose/0.11.2/) to test Kirby:
+
+$ git clone git://github.com/kylefox/kirby.git
+$ cd kirby
+$ nosetests
+
 Contributing
 ------------
 
