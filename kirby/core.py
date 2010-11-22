@@ -76,5 +76,5 @@ class Kirby(object):
         """
         pages = {}
         for page in self.pages.values():
-            pages[page.s3_key] = page.render()
+            pages[page.s3_key] = render(self, page)
         return pages
