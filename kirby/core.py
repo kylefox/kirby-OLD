@@ -2,6 +2,7 @@ import os
 import shutil
 import kirby
 from kirby.pages import Page
+from kirby.render import render
 
 class Kirby(object):
     
@@ -63,7 +64,8 @@ class Kirby(object):
         If that page doesn't exist, None is returned.
         """
         try:
-            return self.pages[path].render()
+            self.reload_pages()
+            return render(self, self.pages[path])
         except KeyError:
             return None
         

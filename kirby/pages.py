@@ -1,7 +1,7 @@
 import os
 import yaml
 import markdown
-from jinja2 import *
+
 
 def file_path_to_url(site, path):
     """
@@ -52,19 +52,6 @@ class Page(object):
         self.data['content'] = markdown.markdown(self.raw_markdown)
         for p in self.data.keys():
             self.__dict__[p] = self.data[p]
-
-
-    def render(self):
-        """
-        Renders out the page object to a template, and return the 
-        resulting html. Pages will attempt to use `page.html` as the 
-        template name which can be overridden in the markdown file.
-        """
-        from kirby.template.default_filters import filters
-        env = Environment(loader=FileSystemLoader(self.site.template_path))
-        env.filters.update(filters)
-        template = env.get_template(self.template)
-        return template.render({ 'page': self, 'pages': PageManager(self.site) })
     
     def __repr__(self):
         return '<Page: %s>' % self.url
