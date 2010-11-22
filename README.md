@@ -86,9 +86,9 @@ Running Tests
 
 We use [nose](http://somethingaboutorange.com/mrl/projects/nose/0.11.2/) to test Kirby:
 
-$ git clone git://github.com/kylefox/kirby.git
-$ cd kirby
-$ nosetests
+    $ git clone git://github.com/kylefox/kirby.git
+    $ cd kirby
+    $ nosetests
 
 Contributing
 ------------
