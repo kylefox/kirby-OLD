@@ -1,0 +1,16 @@
+{% extends "page.html" %}
+
+{% block content %}
+    
+    {{ page.content }}
+
+    <ul>
+    {% for post in pages.in_path('posts') %}
+        <li>
+            <h3><a href="{{post.url}}">{{post.title}}</a></h3>
+            <p>Posted {{post.date}}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
