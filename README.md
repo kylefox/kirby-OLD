@@ -68,14 +68,14 @@ With the exception being the content:
 
 * `{{ page.content }}` contains the markdown-rendered HTML content of your page
 
-Publishing to CloudFront
-------------------------
+Uploading to Amazon S3
+----------------------
 
 Once you're happy with the current state of your site, you can generate static HTML files and upload them to Amazon S3 using:
 
-    $ kirby publish
+    $ kirby s3
     
-Publishing requires these environment variables to be set:
+Uploading to S3 requires these environment variables to be set:
 
 * `AWS_ACCESS_KEY_ID`
 * `AWS_SECRET_ACCESS_KEY`

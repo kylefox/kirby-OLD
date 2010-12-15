@@ -46,7 +46,7 @@ def expiry_date():
     stamp = mktime(future_date.timetuple())
     return format_date_time(stamp)
 
-def publish(site):
+def upload_to_s3(site):
     
     s3_connection, bucket = connect_s3()
     

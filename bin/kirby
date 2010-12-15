@@ -4,7 +4,7 @@ import os
 import kirby
 from kirby.core import Kirby
 from kirby.server import runserver
-from kirby.publisher import publish
+from kirby.s3 import upload_to_s3
 
 def is_kirby_site(path):
   "Checks if `path` is a valid Kirby site."
@@ -28,11 +28,11 @@ if __name__ == "__main__":
   if command == 'serve' and valid_kirby_site():
       runserver(os.getcwd())
       
-  elif command == 'publish' and valid_kirby_site():
+  elif command == 's3' and valid_kirby_site():
     try:
-      publish(Kirby(os.getcwd()))
+      upload_to_s3(Kirby(os.getcwd()))
     except Exception, e:
-      print 'Could not publish: %s' % e
+      print 'Could not upload to Amazon S3: %s' % e
       sys.exit(0)
       
   elif command == 'new':
