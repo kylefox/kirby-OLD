@@ -20,7 +20,7 @@ Creating a Kirby site
 
 You create a new Kirby site with
 
-    $ kirby create example.com
+    $ kirby new example.com
 
 which creates the resulting directory structure:
 
