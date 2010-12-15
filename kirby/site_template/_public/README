@@ -1,0 +1,5 @@
+This _public folder is where your HTML gets saved when running the `publish` command.  It's suitable for uploading to a web server.
+
+PS: You really shouldn't edit files in this directory.
+
+PS: Except this README.  You can delete the README.

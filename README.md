@@ -1,6 +1,6 @@
-A tiny little Python app that compiles markdown + Jinja and uploads the resulting HTML to Amazon S3 + CloudFront.
+A tiny little Python app that compiles [Markdown](http://daringfireball.net/projects/markdown/syntax) + [Jinja2](http://jinja.pocoo.org/) into static HTML and (optionally) uploads it to [Amazon S3](http://aws.amazon.com/s3/) + [CloudFront](http://aws.amazon.com/cloudfront/).
 
-_This is still in early proof-of-concept stages.  It's not recommended for production use just yet._
+_Kirby is still in it's infancy.  Be aware that the API could change dramatically until the first release._
 
 Installing
 ----------
@@ -25,9 +25,18 @@ You create a new Kirby site with
 which creates the resulting directory structure:
 
 * example.com
+  * _public
   * content
   * media
   * templates
+  
+Here is the purpose of each directory:
+
+* **_public** contains your compiled Kirby site after you publish it.  You should not modify this folder's contents.
+* **content** contains your Markdown files (pages & blog posts).
+* **media** contains images, CSS, JavaScript, and other static media.
+* **templates** contains your Jinja2 template files.
+
     
     
 Running the development server
