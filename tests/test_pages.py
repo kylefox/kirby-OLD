@@ -30,3 +30,9 @@ class PageTest(unittest.TestCase):
     def test_custom_template(self):
         page = Page(self.site, os.path.join(self.site.content_path, 'blog.md'))
         self.assertEqual(page.template, 'blog.html')
+        
+    def test_page_html_path(self):
+        self.assertEqual(self.page.html_path, 'posts/example-post/index.html')
+        
+    def test_index_html_path(self):
+        self.assertEqual(self.index.html_path, 'index.html')

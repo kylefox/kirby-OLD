@@ -41,6 +41,9 @@ class Page(object):
         self.s3_key = self.url.lstrip('/')
         if self.url == '/index':
             self.url = '/'
+            self.html_path = 'index.html'
+        else:
+            self.html_path = '%s/index.html' % self.url.lstrip('/')
         content = open(file_path).read()
         try:
             ym, md = content.split('- - -')
