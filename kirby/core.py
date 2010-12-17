@@ -34,7 +34,8 @@ class Kirby(object):
          <Kirby site: example.com>
          """
          site = Kirby(root)
-         for path in 'content_path media_path template_path output_path'.split():
+         # TODO: Remove generated HTML output folder?
+         for path in 'content_path media_path template_path'.split():
              shutil.rmtree(getattr(site, path))
              os.mkdir(getattr(site, path))
     
@@ -43,7 +44,7 @@ class Kirby(object):
       self.content_path = os.path.join(self.root_path, 'content')
       self.template_path = os.path.join(self.root_path, 'templates')
       self.media_path = os.path.join(self.root_path, 'media')
-      self.output_path = os.path.join(self.root_path, '_public')
+      self.default_output_path = os.path.join(self.root_path, '_public')
       self.reload_pages()
       
     def reload_pages(self):
@@ -82,12 +83,12 @@ class Kirby(object):
         
     def html_page_dict(self):
         """
-        Returns a dictionary whose keys are the absolute filesystem paths
+        Returns a dictionary whose keys are the relative filesystem paths
         for each page's HTML output and values are the HTML to be written.
         """
         pages = {}
         for page in self.pages.values():
-            pages[page.absolute_html_path] = render(self, page)
+            pages[page.html_path] = render(self, page)
         return pages
         
         

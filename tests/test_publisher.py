@@ -1,4 +1,5 @@
 import os
+import shutil
 import unittest
 import kirby
 from kirby.core import Kirby
@@ -13,17 +14,18 @@ class PublisherTest(unittest.TestCase):
         self.index = Page(self.site, os.path.join(self.site.content_path, 'index.md'))
         self.page = Page(self.site, os.path.join(self.site.content_path, 'about.md'))
         self.nested_page = Page(self.site, os.path.join(self.site.content_path, 'posts', 'example-post.md'))
-        publish(self.site)
+        self.output_path = os.path.join(os.path.dirname(__file__), '_public')
+        publish(self.site, output_path=self.output_path)
         
     def test_index_file_exists(self):
-        assert os.path.exists(self.index.absolute_html_path)
+        assert os.path.exists(os.path.join(self.output_path, self.index.html_path))
+
+    def test_page_file_exists(self):
+        assert os.path.exists(os.path.join(self.output_path, self.page.html_path))
+        
+    def test_nested_page_file_exists(self):
+        os.path.join(self.output_path, self.nested_page.html_path)
         
     def tearDown(self):
         # Delete all the files/directories we just wrote.
-        pass
-
-    # def test_page_file_exists(self):
-    #     assert os.path.exists(self.page.absolute_html_path)
-    #     
-    # def test_nested_page_file_exists(self):
-    #     assert os.path.exists(self.nested_page.absolute_html_path)
+        shutil.rmtree(self.output_path)
