@@ -44,6 +44,7 @@ class Page(object):
             self.html_path = 'index.html'
         else:
             self.html_path = '%s/index.html' % self.url.lstrip('/')
+        self.absolute_html_path = os.path.join(self.site.output_path, self.html_path)
         content = open(file_path).read()
         try:
             ym, md = content.split('- - -')
