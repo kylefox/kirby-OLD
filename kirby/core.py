@@ -1,5 +1,6 @@
 import os
 import shutil
+import yaml
 import kirby
 from kirby.pages import Page
 from kirby.render import render
@@ -41,6 +42,7 @@ class Kirby(object):
     
     def __init__(self, root):
       self.root_path = root
+      self.config = yaml.load(open(os.path.join(self.root_path, 'config.yml')).read())
       self.content_path = os.path.join(self.root_path, 'content')
       self.template_path = os.path.join(self.root_path, 'templates')
       self.media_path = os.path.join(self.root_path, 'media')

@@ -13,6 +13,12 @@ class PageTest(unittest.TestCase):
         self.page = Page(self.site, os.path.join(self.site.content_path, 'about.md'))
         self.nested_page = Page(self.site, os.path.join(self.site.content_path, 'posts', 'example-post.md'))
 
+    # Site config
+    
+    def test_site_config(self):
+        """Site should have a config dictionary."""
+        self.assertEqual(self.site.config['domain'], 'kirbyapp.com')
+
     # Page URLs:
 
     def test_page_url(self):
