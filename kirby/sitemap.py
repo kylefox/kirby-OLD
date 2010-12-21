@@ -2,9 +2,9 @@ from jinja2 import *
 from kirby.template.default_filters import filters
 
 SITEMAP = """<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{% for page in pages %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{% for page in site.pages.values() %}
    <url>
-      <loc>http://example.com{{page.url}}</loc>
+      <loc>http://{{site.config.domain}}{{page.url}}</loc>
       <lastmod>{{page.modified_at|datetimeformat("%Y-%m-%d")}}</lastmod>
       {% if page.changefreq %}<changefreq></changefreq>{% endif %}
       {% if page.priority %}<priority></priority>{% endif %}
@@ -16,4 +16,4 @@ def sitemap(site):
     env = Environment()
     env.filters.update(filters)
     template = env.from_string(SITEMAP)
-    return template.render(pages=site.pages.values())
+    return template.render(site=site)
