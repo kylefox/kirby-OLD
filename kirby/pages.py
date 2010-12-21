@@ -1,4 +1,5 @@
 import os
+import datetime
 import yaml
 import markdown
 
@@ -35,6 +36,7 @@ class Page(object):
         """
         Initializes the page object with data loaded from a markdown file.
         """
+        self.file_path = file_path
         self.site = site
         self.template = "page.html"
         self.url = file_path_to_url(site, file_path)
@@ -58,3 +60,7 @@ class Page(object):
     
     def __repr__(self):
         return '<Page: %s>' % self.url
+        
+    @property
+    def modified_at(self):
+        return datetime.datetime.fromtimestamp(os.path.getmtime(self.file_path))

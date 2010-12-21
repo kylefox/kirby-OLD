@@ -54,3 +54,10 @@ class PageTest(unittest.TestCase):
     def test_custom_template(self):
         page = Page(self.site, os.path.join(self.site.content_path, 'blog.md'))
         self.assertEqual(page.template, 'blog.html')
+
+    # Sitemap stuff
+
+    def test_page_modification_date(self):
+        """The page should have a `modified_at` property which is a datetime."""
+        from datetime import datetime
+        self.assertEqual(self.page.modified_at.__class__, datetime)
