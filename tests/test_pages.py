@@ -67,3 +67,11 @@ class PageTest(unittest.TestCase):
         """The page should have a `modified_at` property which is a datetime."""
         from datetime import datetime
         self.assertEqual(self.page.modified_at.__class__, datetime)
+        
+    def test_page_priority(self):
+        """Pages may have a priority in the data attribute."""
+        self.assertEqual(self.index.data['priority'], 1.0)
+        
+    def test_page_changefreq(self):
+        """Pages may have a changefreq in the data attribute."""
+        self.assertEqual(self.index.data['changefreq'], 'weekly')

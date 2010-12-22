@@ -1,5 +1,7 @@
 title: Welcome to Kirby!
 subtitle: Putting websites into clouds
+priority: 1.0
+changefreq: weekly
 
 - - -
 
