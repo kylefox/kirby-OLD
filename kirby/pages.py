@@ -40,6 +40,7 @@ class Page(object):
         self.site = site
         self.template = "page.html"
         self.url = file_path_to_url(site, file_path)
+        self.slug = self.url[1:].replace('/', '--')
         self.s3_key = self.url.lstrip('/')
         if self.url == '/index':
             self.url = '/'

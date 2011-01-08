@@ -30,6 +30,17 @@ class PageTest(unittest.TestCase):
     def test_index_url(self):
         self.assertEqual(self.index.url, '/')
         
+    # Slugs
+    
+    def test_page_slug(self):
+        self.assertEqual(self.page.slug, 'about')
+        
+    def test_nested_page_slug(self):
+        self.assertEqual(self.nested_page.slug, 'posts--example-post')
+        
+    def test_index_slug(self):
+        self.assertEqual(self.index.slug, 'index')
+        
     # S3 Keys:    
         
     def test_page_s3_key(self):
