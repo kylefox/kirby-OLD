@@ -16,7 +16,7 @@ GZIP_CONTENT_TYPES = (
 class InvalidAWSCredentials(Exception):
   pass
 
-def connect_s3():
+def connect_s3(bucket_name):
     """
     Opens a connection to Amazon S3 and gets the KIRBY_BUCKET.
     Returns a tuple: (connection, bucket)
@@ -24,9 +24,8 @@ def connect_s3():
     try:
       AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
       AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-      KIRBY_BUCKET = os.environ['KIRBY_BUCKET']
       connection = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-      bucket = connection.get_bucket(KIRBY_BUCKET)
+      bucket = connection.get_bucket(bucket_name)
       return (connection, bucket)
     except KeyError:
       raise InvalidAWSCredentials("Missing Amazon AWS credentials.")
@@ -46,9 +45,9 @@ def expiry_date():
     stamp = mktime(future_date.timetuple())
     return format_date_time(stamp)
 
-def upload_to_s3(site):
+def upload_to_s3(site, bucket_name):
     
-    s3_connection, bucket = connect_s3()
+    s3_connection, bucket = connect_s3(bucket_name)
     
     # Upload content
     print 'Uploading content...'

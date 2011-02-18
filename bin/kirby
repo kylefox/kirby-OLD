@@ -23,6 +23,8 @@ def valid_kirby_site():
     sys.exit(0)
   return True
 
+def get_bucket_file():
+    return os.path.join(os.getcwd(), '.bucket')
 
 if __name__ == "__main__":
   command = sys.argv[1]
@@ -35,7 +37,9 @@ if __name__ == "__main__":
       
   elif command == 's3' and valid_kirby_site():
     try:
-      upload_to_s3(Kirby(os.getcwd()))
+      site = Kirby(os.getcwd())
+      BUCKET_FILE = get_bucket_file()
+      upload_to_s3(site, open(BUCKET_FILE).read())
     except Exception, e:
       print 'Could not upload to Amazon S3: %s' % e
       sys.exit(0)
@@ -53,10 +57,10 @@ if __name__ == "__main__":
       sys.exit(0)
       
   elif command == 'aws':
-    BUCKET_FILE = os.path.join(os.getcwd(), '.bucket')
+    BUCKET_FILE = get_bucket_file()
     try:
-        bucket = open(BUCKET_FILE).read()
-        print "Current S3 bucket: %s" % bucket
+        bucket = create_bucket(open(BUCKET_FILE).read())
+        print "S3 bucket: %s" % bucket.name
     except IOError:        
         domain = raw_input("Enter the name for the S3 bucket (ie: example.com): ")
         bucket = create_bucket(domain)
