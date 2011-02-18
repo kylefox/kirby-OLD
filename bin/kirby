@@ -5,6 +5,7 @@ import kirby
 from kirby.core import Kirby
 from kirby.server import runserver
 from kirby.s3 import upload_to_s3
+from kirby.aws import create_bucket
 from kirby.publisher import publish
 
 def is_kirby_site(path):
@@ -52,10 +53,17 @@ if __name__ == "__main__":
       sys.exit(0)
       
   elif command == 'aws':
-    from kirby.aws import setup_cloud
-    domain = raw_input("Enter the name for the S3 bucket (ie: example.com): ")
-    cloud = setup_cloud(domain)
-    print 'Created distribution: %s' % cloud.domain_name
+    BUCKET_FILE = os.path.join(os.getcwd(), '.bucket')
+    try:
+        bucket = open(BUCKET_FILE).read()
+        print "Current S3 bucket: %s" % bucket
+    except IOError:        
+        domain = raw_input("Enter the name for the S3 bucket (ie: example.com): ")
+        bucket = create_bucket(domain)
+        f = open(BUCKET_FILE, 'w')
+        f.write(bucket.name)
+        f.close
+        print 'Created bucket: %s' % bucket.name
 
   elif command == 'reset' and valid_kirby_site():
     print "**************************************************************************"

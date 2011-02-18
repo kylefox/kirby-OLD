@@ -1,4 +1,4 @@
-A tiny little Python app that compiles [Markdown](http://daringfireball.net/projects/markdown/syntax) + [Jinja2](http://jinja.pocoo.org/) into static HTML and (optionally) uploads it to [Amazon S3](http://aws.amazon.com/s3/) + [CloudFront](http://aws.amazon.com/cloudfront/).
+A tiny little Python app that compiles [Markdown](http://daringfireball.net/projects/markdown/syntax) + [Jinja2](http://jinja.pocoo.org/) into static HTML and (optionally) uploads it to [Amazon S3](http://aws.amazon.com/s3/).
 
 _Kirby is still in it's infancy.  Be aware that the API could change dramatically until the first release._
 
