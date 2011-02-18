@@ -80,15 +80,21 @@ With the exception being the content:
 Uploading to Amazon S3
 ----------------------
 
-Once you're happy with the current state of your site, you can generate static HTML files and upload them to Amazon S3 using:
+Once you're happy with the current state of your site, you can generate static HTML files and upload them to Amazon S3.
+
+First, make sure you've set these environment variables. A good place is in your `~/.profile`
+
+    AWS_ACCESS_KEY_ID='Your Access Key'
+    AWS_SECRET_ACCESS_KEY='Your Secret Key'
+
+Then you need to create an S3 bucket (you only need to do this once):
+
+    $ kirby aws
+    
+Now whenever you want to upload your Kirby site to S3, just run:
 
     $ kirby s3
-    
-Uploading to S3 requires these environment variables to be set:
 
-* `AWS_ACCESS_KEY_ID`
-* `AWS_SECRET_ACCESS_KEY`
-* `KIRBY_BUCKET`
 
 Running Tests
 -------------
